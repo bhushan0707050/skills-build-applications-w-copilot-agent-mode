@@ -13,7 +13,11 @@ export function asItems(payload) {
 }
 
 export async function fetchResource(resource) {
-  const response = await fetch(`${API_BASE_URL}/${resource}/`)
-  if (!response.ok) throw new Error(`Unable to load ${resource}`)
+  return fetchEndpoint(`${API_BASE_URL}/${resource}/`)
+}
+
+export async function fetchEndpoint(endpoint) {
+  const response = await fetch(endpoint)
+  if (!response.ok) throw new Error(`Unable to load ${endpoint}`)
   return asItems(await response.json())
 }
